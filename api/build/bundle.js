@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = config;
 } else {
   // we are in development - return the dev keys!!!
-  var devConfig = __webpack_require__(22); // eslint-disable-line global-require
+  var devConfig = __webpack_require__(10); // eslint-disable-line global-require
 
   module.exports = Object.assign(config, devConfig);
 }
@@ -116,7 +116,7 @@ var _mongoose = __webpack_require__(1);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bcryptNodejs = __webpack_require__(14);
+var _bcryptNodejs = __webpack_require__(15);
 
 var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
 
@@ -230,7 +230,7 @@ var _config = __webpack_require__(0);
 
 var _config2 = _interopRequireDefault(_config);
 
-__webpack_require__(10);
+__webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -257,8 +257,8 @@ app.get('/', function (req, res) {
 
 // requiring routes
 // todo: transform to automatic request for Routes
-__webpack_require__(15)(app);
-__webpack_require__(19)(app);
+__webpack_require__(16)(app);
+__webpack_require__(20)(app);
 
 /**
  * Server setup
@@ -305,17 +305,32 @@ module.exports = require("morgan");
 "use strict";
 
 
+module.exports = {
+  apiPort: process.env.PORT || 5000,
+  secret: 'lksadfnjlaskfjnlk32498234n2kjn',
+  googleClientID: '352663565833-gu3kth2upuj64mhqp5t9l0he1pnkfm9g.apps.googleusercontent.com',
+  googleClientSecret: 'qykRId2w7F1hM_JovgkOSypM',
+  mongoURI: 'mongodb://192.168.99.100:27017/auth'
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _passport = __webpack_require__(2);
 
 var _passport2 = _interopRequireDefault(_passport);
 
-var _passportLocal = __webpack_require__(11);
+var _passportLocal = __webpack_require__(12);
 
 var _passportLocal2 = _interopRequireDefault(_passportLocal);
 
-var _passportJwt = __webpack_require__(12);
+var _passportJwt = __webpack_require__(13);
 
-var _passportGoogleOauth = __webpack_require__(13);
+var _passportGoogleOauth = __webpack_require__(14);
 
 var _UserModel = __webpack_require__(3);
 
@@ -447,37 +462,37 @@ _passport2.default.use(localLogin);
 _passport2.default.use(googleLogin);
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-local");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-jwt");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-google-oauth20");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt-nodejs");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _NoteController = __webpack_require__(16);
+var _NoteController = __webpack_require__(17);
 
 var _NoteController2 = _interopRequireDefault(_NoteController);
 
@@ -517,13 +532,13 @@ module.exports = function (app) {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _NoteService = __webpack_require__(17);
+var _NoteService = __webpack_require__(18);
 
 var _NoteService2 = _interopRequireDefault(_NoteService);
 
@@ -553,13 +568,13 @@ exports.list = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function 
 }));
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _bluebird = __webpack_require__(18);
+var _bluebird = __webpack_require__(19);
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
@@ -573,13 +588,13 @@ exports.list = function () {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("bluebird");
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -589,7 +604,7 @@ var _passport = __webpack_require__(2);
 
 var _passport2 = _interopRequireDefault(_passport);
 
-var _AuthController = __webpack_require__(20);
+var _AuthController = __webpack_require__(21);
 
 var _AuthController2 = _interopRequireDefault(_AuthController);
 
@@ -610,13 +625,13 @@ module.exports = function (app) {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jwtSimple = __webpack_require__(21);
+var _jwtSimple = __webpack_require__(22);
 
 var _jwtSimple2 = _interopRequireDefault(_jwtSimple);
 
@@ -680,25 +695,10 @@ exports.signup = function (req, res, next) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  apiPort: process.env.PORT || 5000,
-  secret: 'lksadfnjlaskfjnlk32498234n2kjn',
-  googleClientID: '352663565833-gu3kth2upuj64mhqp5t9l0he1pnkfm9g.apps.googleusercontent.com',
-  googleClientSecret: 'qykRId2w7F1hM_JovgkOSypM',
-  mongoURI: 'mongodb://192.168.99.100:27017/auth'
-};
 
 /***/ })
 /******/ ]);

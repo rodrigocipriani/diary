@@ -1,7 +1,7 @@
 {
-  "name": "diario",
+  "name": "api",
   "version": "1.0.0",
-  "description": "Diary of daily activities",
+  "description": "Api of Diary of daily activities",
   "main": "index.js",
   "scripts": {
     "start": "node .\\src\\index.js",
@@ -40,11 +40,6 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
     "nodemon": "^1.14.11",
     "npm-run-all": "^4.1.2",
     "webpack": "^3.10.0",
