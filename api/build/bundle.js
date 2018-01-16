@@ -310,7 +310,8 @@ module.exports = {
   secret: 'lksadfnjlaskfjnlk32498234n2kjn',
   googleClientID: '352663565833-gu3kth2upuj64mhqp5t9l0he1pnkfm9g.apps.googleusercontent.com',
   googleClientSecret: 'qykRId2w7F1hM_JovgkOSypM',
-  mongoURI: 'mongodb://192.168.99.100:27017/auth'
+  // mongoURI: 'mongodb://192.168.99.100:27017/auth',
+  mongoURI: 'mongodb://192.168.99.100:27017/diary'
 };
 
 /***/ }),
@@ -617,7 +618,7 @@ var API_PREFIX = '/auth';
 
 module.exports = function (app) {
   app.get(API_PREFIX + '/', requireAuth, function (req, res) {
-    res.send({ hi: 'there', user: req.user });
+    res.send({ hi: 'there 44444!!!!!!', user: req.user });
   });
 
   app.post(API_PREFIX + '/signin', requireSignin, _AuthController2.default.signin);

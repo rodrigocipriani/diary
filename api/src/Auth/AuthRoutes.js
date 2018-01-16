@@ -8,7 +8,7 @@ const API_PREFIX = '/auth';
 
 module.exports = (app) => {
   app.get(`${API_PREFIX}/`, requireAuth, (req, res) => {
-    res.send({ hi: 'there', user: req.user });
+    res.send({ hi: 'there 44444!!!!!!', user: req.user });
   });
 
   app.post(`${API_PREFIX}/signin`, requireSignin, AuthController.signin);

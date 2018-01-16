@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  # nginx:
+  #   container_name: diary-dev-nginx
+  #   image: nginx-dev-i
+  #   build:
+  #     context: .
+  #     dockerfile: ./.docker/nginx.dev.dockerfile
+  #   networks:
+  #     - diary-network
+  #   links:
+  #     - node:node
+  #   ports:
+  #     - "80:80"
+ 
+  node:
+    container_name: diary-dev-app
+    image: diary-dev-i
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    ports:
+      - "5000"
+    networks:
+      - diary-network
+    volumes:
+      - .:/var/app
+    # env_file:
+    #   - ./.docker/env/app.dev.env
+    working_dir: /var/app
+ 
+  mongo:
+    container_name: diary-mongodb
+    image: mongo:latest
+    # build:
+    #   context: .
+    #   dockerfile: ./.docker/mongo.dev.dockerfile
+    # env_file:
+    #   - ./.docker/env/mongo.dev.env
+    networks:
+      - diary-network
+    ports:
+      - "27017:27017"
+    environment:
+      #- MONGO_INITDB_ROOT_USERNAME=user
+      #- MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE="diary"
+ 
+networks:
+  diary-network:
+    driver: bridge
