@@ -10,6 +10,6 @@ MAINTAINER Rodrigo Cipriani da Rosa
 
 # RUN chmod +rx /mongo_scripts/*.sh
 
-EXPOSE 27017
+# EXPOSE 27017
 
 # CMD ["/mongo_scripts/start.sh"]
