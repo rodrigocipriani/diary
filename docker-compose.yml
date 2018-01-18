@@ -6,18 +6,16 @@
 version: "2.1"
 
 services:
-  # nginx:
-  #   container_name: hackershall-dev-nginx
-  #   image: nginx-dev-i
-  #   build:
-  #     context: .
-  #     dockerfile: ./.docker/nginx.dev.dockerfile
-  #   networks:
-  #     - hackershall-network
-  #   links:
-  #     - node:node
-  #   ports:
-  #     - "80:80"
+  nginx:
+    container_name: diary-nginx
+    image: diary-nginx-image
+    build:
+      context: .
+      dockerfile: ./.docker/nginx.dev.dockerfile
+    networks:
+      - diary-network
+    ports:
+      - "80:80"
 
   app:
     container_name: diary-app
@@ -26,7 +24,7 @@ services:
       context: .
       dockerfile: ./.docker/api.dev.dockerfile
     ports:
-      - "4000:5000"
+      - "5000:5000"
     networks:
       - diary-network
     volumes:
@@ -36,6 +34,7 @@ services:
     working_dir: /home/app
     depends_on:
       - mongo
+      - nginx
 
   mongo:
     container_name: diary-mongodb
