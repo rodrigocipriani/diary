@@ -24,14 +24,13 @@ app.use(morgan('combined'));
 app.use(bodyParse.json({ type: '*/*' }));
 
 app.get('/', (req, res) => {
-  res.send('Diary API');
+  res.send('Diary API 2');
 });
 
 // requiring routes
 // todo: transform to automatic request for Routes
 require('./Note/NoteRoutes')(app);
 require('./Auth/AuthRoutes')(app);
-require('./Exchanges/exchangesRoutes')(app);
 
 /**
  * Server setup

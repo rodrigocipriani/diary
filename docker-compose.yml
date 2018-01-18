@@ -29,8 +29,8 @@ services:
       - "4000:5000"
     networks:
       - diary-network
-    # volumes:
-      # - .:/home/app
+    volumes:
+      - ./api:/home/app
     env_file:
       - ./.docker/env/app.dev.env
     working_dir: /home/app

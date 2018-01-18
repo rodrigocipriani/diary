@@ -60,17 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -88,25 +82,25 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = config;
 } else {
   // we are in development - return the dev keys!!!
-  var devConfig = __webpack_require__(11); // eslint-disable-line global-require
+  var devConfig = __webpack_require__(10); // eslint-disable-line global-require
 
   module.exports = Object.assign(config, devConfig);
 }
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = require("mongoose");
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -118,11 +112,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _mongoose = __webpack_require__(2);
+var _mongoose = __webpack_require__(1);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bcryptNodejs = __webpack_require__(16);
+var _bcryptNodejs = __webpack_require__(15);
 
 var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
 
@@ -204,39 +198,39 @@ var UserModel = function (_Schema) {
 exports.default = _mongoose2.default.model('UserModel', new UserModel());
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(6);
+__webpack_require__(5);
 
-var _express = __webpack_require__(7);
+var _express = __webpack_require__(6);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _http = __webpack_require__(8);
+var _http = __webpack_require__(7);
 
 var _http2 = _interopRequireDefault(_http);
 
-var _bodyParser = __webpack_require__(9);
+var _bodyParser = __webpack_require__(8);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _morgan = __webpack_require__(10);
+var _morgan = __webpack_require__(9);
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _mongoose = __webpack_require__(2);
+var _mongoose = __webpack_require__(1);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(0);
 
 var _config2 = _interopRequireDefault(_config);
 
-__webpack_require__(12);
+__webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -258,14 +252,13 @@ app.use((0, _morgan2.default)('combined'));
 app.use(_bodyParser2.default.json({ type: '*/*' }));
 
 app.get('/', function (req, res) {
-  res.send('Diary API');
+  res.send('Diary API 2');
 });
 
 // requiring routes
 // todo: transform to automatic request for Routes
-__webpack_require__(17)(app);
-__webpack_require__(21)(app);
-__webpack_require__(24)(app);
+__webpack_require__(16)(app);
+__webpack_require__(20)(app);
 
 /**
  * Server setup
@@ -276,37 +269,37 @@ server.listen(_config2.default.apiPort, function () {
 });
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-polyfill");
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -324,29 +317,29 @@ module.exports = {
 };
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _passport = __webpack_require__(3);
+var _passport = __webpack_require__(2);
 
 var _passport2 = _interopRequireDefault(_passport);
 
-var _passportLocal = __webpack_require__(13);
+var _passportLocal = __webpack_require__(12);
 
 var _passportLocal2 = _interopRequireDefault(_passportLocal);
 
-var _passportJwt = __webpack_require__(14);
+var _passportJwt = __webpack_require__(13);
 
-var _passportGoogleOauth = __webpack_require__(15);
+var _passportGoogleOauth = __webpack_require__(14);
 
-var _UserModel = __webpack_require__(4);
+var _UserModel = __webpack_require__(3);
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(0);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -472,37 +465,37 @@ _passport2.default.use(localLogin);
 _passport2.default.use(googleLogin);
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-local");
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-jwt");
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-google-oauth20");
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt-nodejs");
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _NoteController = __webpack_require__(18);
+var _NoteController = __webpack_require__(17);
 
 var _NoteController2 = _interopRequireDefault(_NoteController);
 
@@ -542,13 +535,13 @@ module.exports = function (app) {
 };
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _NoteService = __webpack_require__(19);
+var _NoteService = __webpack_require__(18);
 
 var _NoteService2 = _interopRequireDefault(_NoteService);
 
@@ -578,13 +571,13 @@ exports.list = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function 
 }));
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _bluebird = __webpack_require__(20);
+var _bluebird = __webpack_require__(19);
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
@@ -598,23 +591,23 @@ exports.list = function () {
 };
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("bluebird");
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _passport = __webpack_require__(3);
+var _passport = __webpack_require__(2);
 
 var _passport2 = _interopRequireDefault(_passport);
 
-var _AuthController = __webpack_require__(22);
+var _AuthController = __webpack_require__(21);
 
 var _AuthController2 = _interopRequireDefault(_AuthController);
 
@@ -635,21 +628,21 @@ module.exports = function (app) {
 };
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jwtSimple = __webpack_require__(23);
+var _jwtSimple = __webpack_require__(22);
 
 var _jwtSimple2 = _interopRequireDefault(_jwtSimple);
 
-var _UserModel = __webpack_require__(4);
+var _UserModel = __webpack_require__(3);
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(0);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -705,345 +698,10 @@ exports.signup = function (req, res, next) {
 };
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _BitcoinTradeService = __webpack_require__(25);
-
-var _BitcoinTradeService2 = _interopRequireDefault(_BitcoinTradeService);
-
-var _MercadoBitcoinService = __webpack_require__(26);
-
-var _MercadoBitcoinService2 = _interopRequireDefault(_MercadoBitcoinService);
-
-var _BitfinexService = __webpack_require__(27);
-
-var _BitfinexService2 = _interopRequireDefault(_BitfinexService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-module.exports = function (app) {
-  app.get('/exchanges', function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
-      var bitcoinTradeApi, mercadoBitcoinApi, bitfinexApi, tickers, bitcoinTradeBuy, mercadoBitcoinBuy, melhorCompra, bitcoinTradeSell, mercadoBitcoinSell, melhorVenda;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              bitcoinTradeApi = new _BitcoinTradeService2.default('BTC');
-              mercadoBitcoinApi = new _MercadoBitcoinService2.default('BTC');
-              bitfinexApi = new _BitfinexService2.default('BTCUSD');
-              tickers = {};
-
-              // busca tickers
-
-              _context.next = 6;
-              return bitcoinTradeApi.ticker();
-
-            case 6:
-              tickers.bitcoinTrade = _context.sent;
-              _context.next = 9;
-              return mercadoBitcoinApi.ticker();
-
-            case 9:
-              tickers.mercadoBitcoin = _context.sent;
-              _context.next = 12;
-              return bitfinexApi.ticker();
-
-            case 12:
-              tickers.bitfinex = _context.sent;
-
-
-              // Melhor compra
-              bitcoinTradeBuy = tickers.bitcoinTrade.ticker.buy;
-              mercadoBitcoinBuy = tickers.mercadoBitcoin.ticker.buy;
-              melhorCompra = '!!!Melhor compra: ';
-
-              if (bitcoinTradeBuy < mercadoBitcoinBuy) {
-                melhorCompra += 'Bitcoin Trade: ' + bitcoinTradeBuy + ' vs ' + mercadoBitcoinBuy + ' != ' + (mercadoBitcoinBuy - bitcoinTradeBuy);
-              } else {
-                melhorCompra += 'Mercado Bitcoin: ' + mercadoBitcoinBuy + ' vs ' + bitcoinTradeBuy + ' != ' + (bitcoinTradeBuy - mercadoBitcoinBuy);
-              }
-
-              // Melhor venda
-              bitcoinTradeSell = tickers.bitcoinTrade.ticker.sell;
-              mercadoBitcoinSell = tickers.mercadoBitcoin.ticker.sell;
-              melhorVenda = 'Melhor venda: ';
-
-              if (bitcoinTradeSell > mercadoBitcoinSell) {
-                melhorVenda += 'Bitcoin Trade: ' + bitcoinTradeSell + ' vs ' + bitcoinTradeSell + ' != ' + (bitcoinTradeSell - mercadoBitcoinSell);
-              } else {
-                melhorVenda += 'Mercado Bitcoin: ' + mercadoBitcoinSell + ' vs ' + bitcoinTradeSell + ' != ' + (mercadoBitcoinSell - bitcoinTradeSell);
-              }
-
-              return _context.abrupt('return', res.json({ tickers: tickers, melhorCompra: melhorCompra, melhorVenda: melhorVenda }));
-
-            case 22:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x, _x2) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-};
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _axios = __webpack_require__(0);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var BitcoinTradeApi = function () {
-  function BitcoinTradeApi(coin) {
-    _classCallCheck(this, BitcoinTradeApi);
-
-    this.coin = coin || 'BTC';
-
-    this.api = _axios2.default.create({
-      baseURL: 'https://api.bitcointrade.com.br'
-    });
-  }
-
-  _createClass(BitcoinTradeApi, [{
-    key: 'ticker',
-    value: function ticker() {
-      return this.api.get('/v1/public/' + this.coin + '/ticker/').then(function (response) {
-        return { ticker: response.data.data };
-      }).catch(function (error) {
-        return { message: error.response.data.message };
-      });
-    }
-  }]);
-
-  return BitcoinTradeApi;
-}();
-
-module.exports = BitcoinTradeApi;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _axios = __webpack_require__(0);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MercadoBitcoinApi = function () {
-  function MercadoBitcoinApi(coin) {
-    _classCallCheck(this, MercadoBitcoinApi);
-
-    this.coin = coin || 'BTC';
-
-    this.api = _axios2.default.create({
-      baseURL: 'https://www.mercadobitcoin.net'
-    });
-  }
-
-  _createClass(MercadoBitcoinApi, [{
-    key: 'ticker',
-    value: function ticker() {
-      return this.api.get('/api/' + this.coin + '/ticker/').then(function (response) {
-        // console.log(response);
-        var d = response.data.ticker;
-        return {
-          ticker: {
-            high: parseFloat(d.high),
-            low: parseFloat(d.low),
-            volume: parseFloat(d.vol),
-            last: parseFloat(d.last),
-            buy: parseFloat(d.buy),
-            sell: parseFloat(d.sell),
-            date: d.date
-          }
-        };
-      }).catch(function (error) {
-        return (
-          // console.log(error);
-          error
-        );
-      });
-    }
-  }]);
-
-  return MercadoBitcoinApi;
-}();
-
-module.exports = MercadoBitcoinApi;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _axios = __webpack_require__(0);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _MoneyConverterService = __webpack_require__(28);
-
-var _MoneyConverterService2 = _interopRequireDefault(_MoneyConverterService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var BitfinexService = function () {
-  function BitfinexService(coin) {
-    _classCallCheck(this, BitfinexService);
-
-    this.coin = coin || 'BTCUSD';
-
-    this.api = _axios2.default.create({
-      baseURL: 'https://api.bitfinex.com'
-    });
-    this.MoneyConverterService = new _MoneyConverterService2.default();
-  }
-
-  _createClass(BitfinexService, [{
-    key: 'ticker',
-    value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var response, d, cotacoes, fatorReal;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.api.get('/v1/pubticker/' + this.coin);
-
-              case 2:
-                response = _context.sent;
-
-                // console.log(response);
-                d = response.data;
-                _context.next = 6;
-                return this.MoneyConverterService.getCotacoes();
-
-              case 6:
-                cotacoes = _context.sent;
-                fatorReal = cotacoes.rates.BRL;
-
-                console.log('Cotação do Real para o dólar', cotacoes.rates.BRL);
-
-                return _context.abrupt('return', {
-                  ticker: {
-                    mid: parseFloat(d.mid),
-                    sell: parseFloat(d.bid * fatorReal),
-                    buy: parseFloat(d.ask * fatorReal),
-                    last: parseFloat(d.last_price * fatorReal),
-                    low: parseFloat(d.low * fatorReal),
-                    high: parseFloat(d.high * fatorReal),
-                    volume: parseFloat(d.volume),
-                    date: d.timestamp
-                  }
-                });
-
-              case 10:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function ticker() {
-        return _ref.apply(this, arguments);
-      }
-
-      return ticker;
-    }()
-  }]);
-
-  return BitfinexService;
-}();
-
-module.exports = BitfinexService;
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _axios = __webpack_require__(0);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MoneyConverterService = function () {
-  function MoneyConverterService() {
-    _classCallCheck(this, MoneyConverterService);
-
-    this.api = _axios2.default.create({
-      baseURL: 'https://api.fixer.io'
-    });
-  }
-
-  _createClass(MoneyConverterService, [{
-    key: 'getCotacoes',
-    value: function getCotacoes(b) {
-      var base = b || 'USD';
-
-      return this.api.get('/latest?base=' + base).then(function (response) {
-        return response.data;
-      }).catch(function (error) {
-        return { message: error.response.data.message };
-      });
-    }
-  }]);
-
-  return MoneyConverterService;
-}();
-
-module.exports = MoneyConverterService;
 
 /***/ })
 /******/ ]);
