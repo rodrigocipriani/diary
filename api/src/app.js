@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 // todo: transform to automatic request for Routes
 require('./Note/NoteRoutes')(app);
 require('./Auth/AuthRoutes')(app);
+require('./Exchanges/exchangesRoutes')(app);
 
 /**
  * Server setup
