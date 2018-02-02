@@ -1,5 +1,5 @@
-import passport from 'passport';
-import AuthController from './AuthController';
+const passport = require('passport');
+const AuthController = require('./AuthController')();
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false });

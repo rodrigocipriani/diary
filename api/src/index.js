@@ -1,15 +1,15 @@
-import 'babel-polyfill';
-import express from 'express';
-import http from 'http';
-import bodyParse from 'body-parser';
-import morgan from 'morgan';
-import mongoose from 'mongoose';
-import config from './config';
+require('babel-polyfill');
+const express = require('express');
+const http = require('http');
+const bodyParse = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config');
 
 /**
  * Call passport configurations
  */
-import './Auth/passportStrategies';
+// require('./Auth/passportStrategies');
 
 /**
  * DB setup

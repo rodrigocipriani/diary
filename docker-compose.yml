@@ -47,7 +47,20 @@ services:
     networks:
       - diary-network
     ports:
-      - "27018:27017"
+      - "27017:27017"
+    volumes:
+      # Problems with volumes in windows
+      # https://github.com/docker-library/mongo/issues/74
+      - data_volume:/data/db
+
+      # - /C/Users/rodrigocipriani/workspace/diary/data/mongodb:/data/db # Windows problem with mongodb
+      # - /data2/mongodb:/data/db # Windows problem with mongodb
+      # - ./data/mongodb:/data/db
+      # - /Users/rodrigocipriani/workspace/diary/data2/mongodb:/data/db
+
+volumes:
+  data_volume:
+    external: true
 
 networks:
   diary-network:

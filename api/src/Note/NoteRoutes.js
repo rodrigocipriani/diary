@@ -1,4 +1,4 @@
-import NoteController from './NoteController';
+const NoteController = require('./NoteController');
 
 const API_PREFIX = '/note';
 

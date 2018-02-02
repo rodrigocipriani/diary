@@ -1,6 +1,6 @@
-import promise from 'bluebird';
+const Promise = require('bluebird');
 
-exports.list = () => new promise(((resolve, reject) => {
+exports.list = () => new Promise(((resolve, reject) => {
   const mock = ['aaa', 'bbb', 'ccc'];
   resolve(mock);
 }));

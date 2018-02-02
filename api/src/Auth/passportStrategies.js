@@ -1,9 +1,10 @@
-import passport from 'passport';
-import LocalStrategy from 'passport-local';
-import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import UserModel from '../User/UserModel';
-import config from '../config';
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const JwtStrategy = require('passport-jwt').Strategy;
+const { ExtractJwt } = require('passport-jwt');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const UserModel = require('../User/UserModel');
+const config = require('../config');
 
 /**
  * GOOGLE STRATEGY
