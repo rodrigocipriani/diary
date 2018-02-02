@@ -7,8 +7,9 @@
     "start": "node .\\src\\index.js",
     "build": "webpack --config webpack.config.js",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:build": "webpack --config webpack.config.js --watch",
-    "dev:start": "nodemon --legacy-watch build/bundle.js",
+    "dev:start": "nodemon --legacy-watch src/index.js",
+    "_dev:build": "webpack --config webpack.config.js --watch",
+    "_dev:start": "nodemon --legacy-watch build/bundle.js",
     "webpack-erros": "webpack --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

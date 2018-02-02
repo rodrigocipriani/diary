@@ -2,7 +2,7 @@ const jwt = require('jwt-simple');
 const UserModel = require('../User/UserModel');
 const config = require('../config');
 
-const AuthController = (app) => {
+const AuthController = () => {
   const tokenForUseruser = (user) => {
     const timestamp = new Date().getTime();
     return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);

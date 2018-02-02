@@ -4,12 +4,13 @@ const http = require('http');
 const bodyParse = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Routes = require('./Routes');
 const config = require('./config');
 
 /**
  * Call passport configurations
  */
-// require('./Auth/passportStrategies');
+require('./Auth/passportStrategies');
 
 /**
  * DB setup
@@ -28,9 +29,7 @@ app.get('/', (req, res) => {
 });
 
 // requiring routes
-// todo: transform to automatic request for Routes
-require('./Note/NoteRoutes')(app);
-require('./Auth/AuthRoutes')(app);
+Routes(app);
 
 /**
  * Server setup
