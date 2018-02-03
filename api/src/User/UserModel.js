@@ -1,47 +1,67 @@
-const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-const UserModel = new Schema({
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-  },
-  password: String,
-});
+module.exports = (sequelize, DataTypes) => {
+  const UserModel = sequelize.define('UserModel', {
+    id: {
+      type: DataTypes.INTEGER,
+      underscored: true,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    email: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      underscored: true,
+    },
+    password: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      underscored: true,
+    },
+    googleId: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      underscored: true,
+    },
+    createAt: {
+      type: DataTypes.DATE,
+      underscored: true,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  }, {
+    tableName: 'user',
+  });
 
-// On Save hook, encrypt password
-// Before saving a model, run this function
-function preSave(next) {
-  // get access to the user model
-  const user = this;
+  const beforeSave = async (user) => {
+    // generate a salt then run callback
+    await bcrypt.genSalt(10, (err, salt) => {
+      if (err) {
+        return sequelize.Promise.reject(err);
+      }
 
-  // generate a salt then run callback
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) { return next(err); }
+      // hash (encrypt) our password using the salt
+      return bcrypt.hash(user.password, salt, null, (errHash, hash) => {
+        if (errHash) { return sequelize.Promise.reject(errHash); }
 
-    // hash (encrypt) our password using the salt
-    bcrypt.hash(user.password, salt, null, (errHash, hash) => {
-      if (errHash) { return next(errHash); }
-
-      // overwrite plain texxt password with encrypted password
-      user.password = hash;
-      return next();
+        // overwrite plain texxt password with encrypted password
+        user.password = hash; // eslint-disable-line no-param-reassign
+        return true;
+      });
     });
-    return false;
-  });
-}
+  };
 
-function comparePassword(candidatePassword, callback) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) { return callback(err); }
+  function comparePassword(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+      if (err) { return callback(err); }
 
-    return callback(null, isMatch);
-  });
-}
+      return callback(null, isMatch);
+    });
+  }
 
-UserModel.pre('save', preSave);
-UserModel.methods.comparePassword = comparePassword;
+  UserModel.prototype.comparePassword = comparePassword;
+  // UserModel.beforeCreate(beforeSave);
+  UserModel.beforeSave(beforeSave);
 
-module.exports = mongoose.model('UserModel', UserModel);
+  return UserModel;
+};

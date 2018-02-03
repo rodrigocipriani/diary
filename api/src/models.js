@@ -54,6 +54,7 @@ fs
 // todo: think about automatizate
 models = {
   NoteModel: sequelize.import('./Note/NoteModel'),
+  UserModel: sequelize.import('./User/UserModel'),
 };
 
 Object.keys(models).forEach((modelName) => {

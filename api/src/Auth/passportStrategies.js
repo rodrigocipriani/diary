@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const UserModel = require('../User/UserModel');
+const { UserModel } = require('../models');
 const config = require('../config');
 
 /**
@@ -17,13 +17,13 @@ const googleLogin = new GoogleStrategy(
     proxy: true,
   },
   async (accessToken, refreshToken, profile, done) => {
-    const existingUser = await UserModel.findOne({ googleId: profile.id });
+    const existingUser = await UserModel.findOne({ where: { googleId: profile.id } });
 
     if (existingUser) {
       return done(null, existingUser);
     }
 
-    const user = await new UserModel({ googleId: profile.id, email: profile.email }).save();
+    const user = await UserModel.build({ googleId: profile.id, email: profile.email }).save();
     return done(null, user);
   },
 );
@@ -39,8 +39,8 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   // Verify this email and password, call done with the user
   // if it is the corret email and password
   // otherwise, call done with false
-  UserModel.findOne({ email }, (err, user) => {
-    if (err) { return done(err); }
+  UserModel.findOne({ where: { email } }).then((user) => {
+    // if (err) { return done(err); }
     if (!user) { return done(null, false); }
 
     // compare passwords - is `password` equal to user.password?
@@ -68,8 +68,9 @@ const jwtLogin = new JwtStrategy(jwtOptions, ((payload, done) => {
   // See if the user ID in the payload exists in our database
   // If it does, call 'done' with that other
   // otherwise, call done without a user object
-  UserModel.findById(payload.sub, (err, user) => {
-    if (err) { return done(err, false); }
+  console.log('payload', payload);
+  UserModel.findById(payload.sub).then((user) => {
+    // if (err) { return done(err, false); }
 
     if (user) {
       return done(null, user);
