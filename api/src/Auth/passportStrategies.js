@@ -8,15 +8,12 @@ const config = require('../config');
 
 
 passport.serializeUser((user, done) => {
-  console.log('@@@ user', user);
   done(null, user.id);
   // done(null, 123);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log('@@@2 id', id);
   UserModel.findById(id).then((user) => {
-    console.log('@@@3 user', user);
     done(null, user);
   });
   // done(null, {apiKey: '123'});
@@ -42,9 +39,6 @@ const googleLogin = new GoogleStrategy(
       if (existingUser) {
         return done(null, existingUser);
       }
-      console.log('profile.id', profile.id);
-      console.log('profile.email', profile.email);
-      console.log('profile', profile);
 
       const googleId = profile.id;
       let email = null;
@@ -52,9 +46,7 @@ const googleLogin = new GoogleStrategy(
       if (emails.length > 0) {
         email = emails[0].value;
       }
-      console.log('googleId, email', googleId, email);
       const user = await UserModel.build({ googleId, email }).save();
-      console.log('user', user);
 
       return done(null, user);
     } catch (err) {
@@ -106,7 +98,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, ((payload, done) => {
   // See if the user ID in the payload exists in our database
   // If it does, call 'done' with that other
   // otherwise, call done without a user object
-  console.log('payload', payload);
   UserModel.findById(payload.sub).then((user) => {
     // if (err) { return done(err, false); }
 

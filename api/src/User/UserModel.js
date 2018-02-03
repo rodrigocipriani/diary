@@ -40,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
         return sequelize.Promise.reject(err);
       }
 
-      console.log('user.password', user.password);
       if (!user.password || user.password === 'undefined') {
         return true;
       }
