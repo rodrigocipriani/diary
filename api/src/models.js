@@ -1,20 +1,18 @@
 // const fs = require('fs');
 // const path = require('path');
 const Sequelize = require('sequelize');
+const config = require('./config');
 const cls = require('cls-hooked');
 const Promise = require('bluebird');
 const clsBluebird = require('cls-bluebird');
 
 const namespace = cls.createNamespace('cls-pg-bwl');
+
 clsBluebird(namespace, Promise);
 Sequelize.useCLS(namespace);
 
 // const env = process.env.NODE_ENV || 'development';
 let models = {};
-
-const database = process.env.POSTGRES_DATABASE || 'diary';
-const username = process.env.POSTGRES_DATABASE || 'postgres';
-const password = process.env.POSTGRES_DATABASE || 'postgres';
 
 const bdConfig = {
   host: 'postgres',
@@ -33,7 +31,12 @@ const bdConfig = {
   },
 };
 
-const sequelize = new Sequelize(database, username, password, bdConfig);
+const sequelize = new Sequelize(
+  config.postgresDatabase,
+  config.postresUsername,
+  config.postgresPassword,
+  bdConfig,
+);
 
 /*
 const basename = path.basename(__filename);

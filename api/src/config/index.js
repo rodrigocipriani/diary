@@ -4,6 +4,9 @@ const config = {
   googleClientID: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   mongoURI: process.env.MONGO_URI,
+  postgresDatabase: process.env.POSTGRES_DATABASE,
+  postresUsername: process.env.POSTGRES_USERNAME,
+  postgresPassword: process.env.POSTGRES_PASSWORD,
 };
 
 if (process.env.NODE_ENV === 'production') {
