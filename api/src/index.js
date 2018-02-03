@@ -6,35 +6,46 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Routes = require('./Routes');
 const config = require('./config');
+const models = require('./models/index');
 
+const boot = async () => {
 /**
  * Call passport configurations
  */
-require('./Auth/passportStrategies');
+  require('./Auth/passportStrategies');
 
-/**
+  /**
  * DB setup
  */
-mongoose.connect(config.mongoURI);
+  mongoose.connect(config.mongoURI);
 
-/**
+  /**
  * App setup
  */
-const app = express();
-app.use(morgan('combined'));
-app.use(bodyParse.json({ type: '*/*' }));
+  const app = express();
+  app.use(morgan('combined'));
+  app.use(bodyParse.json({ type: '*/*' }));
 
-app.get('/', (req, res) => {
-  res.send('Diary API');
-});
+  app.get('/', (req, res) => {
+    res.send('Diary API');
+  });
 
-// requiring routes
-Routes(app);
+  // requiring routes
+  Routes(app);
 
-/**
+  /**
+ * Initialize Postgress BD with Sequelize
+ */
+  // require('./models/index')();
+  await models.sequelize.sync({});
+
+  /**
  * Server setup
  */
-const server = http.createServer(app);
-server.listen(config.apiPort, () => {
-  console.log(`Server runing on port ${config.apiPort}`);
-});
+  const server = http.createServer(app);
+  server.listen(config.apiPort, () => {
+    console.log(`Server runing on port ${config.apiPort}`);
+  });
+};
+
+boot();

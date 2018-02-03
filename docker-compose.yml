@@ -18,6 +18,7 @@ services:
       - "80:80"
 
   postgres:
+    container_name: diary-postgres
     image: postgres:10
     restart: always
     environment:
@@ -30,6 +31,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   adminer:
+    container_name: diary-adminer
     image: adminer
     restart: always
     ports:

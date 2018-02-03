@@ -28,6 +28,8 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "cls-bluebird": "^2.1.0",
+    "cls-hooked": "^4.2.2",
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.13.9",
@@ -35,7 +37,10 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^3.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pg": "^6.4.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.32.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
