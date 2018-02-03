@@ -45,7 +45,7 @@ const boot = async () => {
  */
   const server = http.createServer(app);
   server.listen(config.apiPort, () => {
-    console.log(`Server runing on port ${config.apiPort}`);
+    console.log(`Server runing on port ${config.apiPort}`); // eslint-disable-line no-console
   });
 };
 

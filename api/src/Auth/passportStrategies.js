@@ -17,9 +17,7 @@ const googleLogin = new GoogleStrategy(
     proxy: true,
   },
   async (accessToken, refreshToken, profile, done) => {
-    console.log('profile', profile);
     const existingUser = await UserModel.findOne({ googleId: profile.id });
-    console.log('existingUser', existingUser);
 
     if (existingUser) {
       return done(null, existingUser);
