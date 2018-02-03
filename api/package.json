@@ -1,7 +1,6 @@
 {
-  "name": "api",
+  "name": "diary-api",
   "version": "1.0.0",
-  "description": "Api of Diary of daily activities",
   "main": "index.js",
   "scripts": {
     "start": "node .\\src\\index.js",
