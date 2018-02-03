@@ -6,13 +6,14 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Routes = require('./Routes');
 const config = require('./config');
-const models = require('./models/index');
+const models = require('./models');
+const passportStrategies = require('./Auth/passportStrategies');
 
 const boot = async () => {
 /**
  * Call passport configurations
  */
-  require('./Auth/passportStrategies');
+  passportStrategies.init();
 
   /**
  * DB setup

@@ -1,19 +1,5 @@
-// module.exports = (sequelize, DataTypes) => {
-//   const Note = sequelize.define('Note', {
-//     text: DataTypes.STRING,
-//   }, {
-//     tableName: 'note',
-//     classMethods: {
-//       associate(models) {
-//         // associations can be defined here
-//       },
-//     },
-//   });
-//   return Note;
-// };
-
 module.exports = (sequelize, DataTypes) => {
-  const note = sequelize.define('note', {
+  const NoteModel = sequelize.define('NoteModel', {
 
     id: {
       type: DataTypes.INTEGER,
@@ -34,8 +20,16 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'note',
-
   });
 
-  return note;
+  /*
+  NoteModel.associate = (models) => {
+    NoteModel.belongsToMany(models.Team, {
+      through: 'member',
+      foreignKey: 'userId',
+    });
+  };
+  */
+
+  return NoteModel;
 };

@@ -80,7 +80,11 @@ const jwtLogin = new JwtStrategy(jwtOptions, ((payload, done) => {
   });
 }));
 
-// Tell passport to use this passport
-passport.use(jwtLogin);
-passport.use(localLogin);
-passport.use(googleLogin);
+module.exports = {
+  init() {
+    // Tell passport to use this passport
+    passport.use(jwtLogin);
+    passport.use(localLogin);
+    passport.use(googleLogin);
+  },
+};

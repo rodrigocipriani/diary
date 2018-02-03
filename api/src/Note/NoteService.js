@@ -1,17 +1,16 @@
 const Promise = require('bluebird');
 // const NoteModel = require('../models/NoteModel');
-const models = require('../models/index');
+const { NoteModel } = require('../models');
 
 const NoteServices = {
   list() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const mock = ['aaa', 'bbb', 'ccc'];
       resolve(mock);
     });
   },
   add(text) {
-    console.log('models.note', models.note);
-    return models.note.build({ text }).save();
+    return NoteModel.build({ text }).save();
   },
 };
 
