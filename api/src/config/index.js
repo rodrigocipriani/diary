@@ -7,6 +7,7 @@ const config = {
   postgresDatabase: process.env.POSTGRES_DATABASE,
   postresUsername: process.env.POSTGRES_USERNAME,
   postgresPassword: process.env.POSTGRES_PASSWORD,
+  cookieKey: process.env.COOKIE_KEY,
 };
 
 if (process.env.NODE_ENV === 'production') {

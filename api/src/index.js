@@ -2,30 +2,39 @@ require('babel-polyfill');
 const express = require('express');
 const http = require('http');
 const bodyParse = require('body-parser');
+const cookieSession = require('cookie-session');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const config = require('./config');
 const models = require('./models');
+const passport = require('passport');
 const passportStrategies = require('./Auth/passportStrategies');
 
 const boot = async () => {
-/**
- * Call passport configurations
- */
-  passportStrategies.init();
-
-  /**
- * DB setup
- */
-  mongoose.connect(config.mongoURI);
-
   /**
  * App setup
  */
   const app = express();
   app.use(morgan('combined'));
   app.use(bodyParse.json({ type: '*/*' }));
+  app.use(cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [config.cookieKey],
+  }));
+
+  /**
+ * Call passport configurations
+ */
+  passportStrategies.init();
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+
+  /**
+ * DB setup
+ */
+  mongoose.connect(config.mongoURI);
 
   app.get('/', (req, res) => {
     res.send('Diary API');

@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       underscored: true,
     },
     password: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       underscored: true,
     },
     googleId: {
@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         return sequelize.Promise.reject(err);
       }
 
+      console.log('user.password', user.password);
+      if (!user.password || user.password === 'undefined') {
+        return true;
+      }
       // hash (encrypt) our password using the salt
       return bcrypt.hash(user.password, salt, null, (errHash, hash) => {
         if (errHash) { return sequelize.Promise.reject(errHash); }

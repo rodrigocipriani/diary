@@ -6,8 +6,27 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { UserModel } = require('../models');
 const config = require('../config');
 
+
+passport.serializeUser((user, done) => {
+  console.log('@@@ user', user);
+  done(null, user.id);
+  // done(null, 123);
+});
+
+passport.deserializeUser((id, done) => {
+  console.log('@@@2 id', id);
+  UserModel.findById(id).then((user) => {
+    console.log('@@@3 user', user);
+    done(null, user);
+  });
+  // done(null, {apiKey: '123'});
+});
+
 /**
  * GOOGLE STRATEGY
+ *
+ * To test in docker (192.168.99.100) use http://192.168.99.100.xip.io
+ * To test in docker (192.168.99.100) use http://192.168.99.100.nip.io
  */
 const googleLogin = new GoogleStrategy(
   {
@@ -17,14 +36,30 @@ const googleLogin = new GoogleStrategy(
     proxy: true,
   },
   async (accessToken, refreshToken, profile, done) => {
-    const existingUser = await UserModel.findOne({ where: { googleId: profile.id } });
+    try {
+      const existingUser = await UserModel.findOne({ where: { googleId: profile.id } });
 
-    if (existingUser) {
-      return done(null, existingUser);
+      if (existingUser) {
+        return done(null, existingUser);
+      }
+      console.log('profile.id', profile.id);
+      console.log('profile.email', profile.email);
+      console.log('profile', profile);
+
+      const googleId = profile.id;
+      let email = null;
+      const { emails } = profile;
+      if (emails.length > 0) {
+        email = emails[0].value;
+      }
+      console.log('googleId, email', googleId, email);
+      const user = await UserModel.build({ googleId, email }).save();
+      console.log('user', user);
+
+      return done(null, user);
+    } catch (err) {
+      return done(err, false);
     }
-
-    const user = await UserModel.build({ googleId: profile.id, email: profile.email }).save();
-    return done(null, user);
   },
 );
 
@@ -44,6 +79,9 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
     if (!user) { return done(null, false); }
 
     // compare passwords - is `password` equal to user.password?
+    if (!password || password === 'undefined') {
+      return done('Password not accepted');
+    }
     user.comparePassword(password, (errComparePassword, isMatch) => {
       if (errComparePassword) { return done(errComparePassword); }
       if (!isMatch) { return done(null, false); }
